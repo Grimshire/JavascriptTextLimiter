@@ -1,0 +1,42 @@
+(function() {	  
+
+  	var marginLefts = new Array();
+          
+
+    document.addEventListener('keyup', function (event) {
+      var textareas = document.getElementsByClassName("txtLimit"); //depends on a txtLimit element for every txtFeedback element
+      var feedbacks = document.getElementsByClassName("txtFeedback"); 
+      for(var X in feedbacks){
+        X.innerHTML = text_max + " characters remaining";
+      }
+      //$('.txtFeedback').html(text_max + " characters remaining");
+      for (var i = 0; i < textareas.length; i++) {
+        var thisElem = textareas[i];
+        var feedback = feedbacks[i];
+        
+        if(document.getElementById(feedback.id)){        
+          var text_max = thisElem.maxLength;                      
+          var text_length = thisElem.value.length; //char count
+          var text_remaining = thisElem.maxLength - text_length;
+          if (text_length > 250)
+          {
+            feedback.style.marginTop = 0;
+            feedback.style.marginBottom = -5;
+
+          }
+
+        //$("#" + feedback.id).html(text_length + '/' + text_max);
+        	
+        	feedback.innerHTML = text_length + '/' + text_max;
+        }
+      }
+
+    });
+          
+})();
+
+function tbLimit() { //text max length function
+          var tbObj = event.srcElement;
+          //console.log("" + tbObj.value.length + ":" + tbObj.maxLength);
+          if (tbObj.value.length == tbObj.maxLength * 1) return false; 
+}
